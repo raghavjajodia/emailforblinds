@@ -47,38 +47,49 @@ public class MainActivity extends Activity implements OnClickListener, OnInitLis
       Button  b = (Button) findViewById(R.id.button1);
       b.setOnClickListener(this);
       tts = new TextToSpeech(this,this);  
-      textts.speak("Welcome to the app.To send a mail, speak send and to receive the mail, speak receive");
+		
    
          
         	 }    
     
     public void onClick(View v) {	
-			
+       		
 			SpeechRecognitionHelper.run(MainActivity.this);	
 							}      
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (resultCode) {		
-			case RESULT_OK: {
-			
-			if(resultCode == RESULT_OK && null != data) {
-				
-				Toast t = Toast.makeText(getApplicationContext(),
+			case RESULT_OK: {			
+				if(resultCode == RESULT_OK && null != data) {
+					Toast t = Toast.makeText(getApplicationContext(),
 						"Speech Recognized",
 						Toast.LENGTH_SHORT);
-				t.show();
+					t.show();
 
-			text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+					text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 			}
 		
-			break;
-			}
-			
-			case RecognizerIntent.RESULT_NO_MATCH:{
-				textts.speak("Not able to recognize");
 				break;
 			}
+			
+			case RecognizerIntent.RESULT_AUDIO_ERROR:{
+			    textts.speak("Audio Error");
+			    break;}
+			case RecognizerIntent.RESULT_CLIENT_ERROR:{
+			    textts.speak("Client Error");
+			    break;}
+			case RecognizerIntent.RESULT_NETWORK_ERROR:{
+			    textts.speak("Network Error");
+			    break;}
+			case RecognizerIntent.RESULT_NO_MATCH:{
+			    textts.speak("No Match");
+			    break;}
+			case RecognizerIntent.RESULT_SERVER_ERROR:{
+			    textts.speak("Server Error");
+			    break;
+			   }
+			
 		}
 		
 		String s = text.get(0);	

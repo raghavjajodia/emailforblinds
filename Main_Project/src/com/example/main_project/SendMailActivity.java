@@ -85,6 +85,25 @@ public class SendMailActivity extends Activity{
 			
 				break;
 				}
+				
+				case RecognizerIntent.RESULT_AUDIO_ERROR:{
+				    textts.speak("Audio Error");
+				    break;}
+				case RecognizerIntent.RESULT_CLIENT_ERROR:{
+				    textts.speak("Client Error");
+				    break;}
+				case RecognizerIntent.RESULT_NETWORK_ERROR:{
+				    textts.speak("Network Error");
+				    break;}
+				case RecognizerIntent.RESULT_NO_MATCH:{
+				    textts.speak("No Match");
+				    break;}
+				case RecognizerIntent.RESULT_SERVER_ERROR:{
+				    textts.speak("Server Error");
+				    break;
+				   }
+				
+				
 			}
 
 			String s = text.get(0);	
